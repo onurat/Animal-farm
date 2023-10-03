@@ -7,6 +7,9 @@ import Footer from './components/footer/Footer';
 function App() {
   return (
     <div className="App">
+      <div className="background-image">
+      <img src="/images/BackgroundImage.jpg" alt="Background" />
+      </div>
       <Navbar />
       <Calendar />
       <Footer />
