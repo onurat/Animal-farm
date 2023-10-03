@@ -7,12 +7,12 @@ import Footer from './components/footer/Footer';
 function App() {
   return (
     <div className="App">
-      <div className="background-image">
-      <img src="/images/BackgroundImage.jpg" alt="Background" />
+      <div className="background-image"></div>
+      <div className="content-wrapper">
+        <Navbar />
+        <Calendar />
+        <Footer />
       </div>
-      <Navbar />
-      <Calendar />
-      <Footer />
     </div>
   );
 }
