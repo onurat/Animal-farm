@@ -3,28 +3,20 @@
   --radius: 12px;
 }
 
-
 body {
   font-family: 'Roboto', sans-serif;
   background-color: #f8f7fa;
   color: #333;
 }
 
-
 .calendar {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  margin-top: -225px;
-  margin-left: -195px;
-  width: 360px;
+  width: 45%; /* Adjust the width as needed */
   padding: 15px;
   box-shadow: 1px 1px 20px 0 rgba(0, 0, 0, 0.4);
   border-radius: var(--radius);
   overflow: hidden;
   background-color: rgba(255, 255, 255, 0.95);
 }
-
 
 .calendar--nav {
   margin: -15px -15px 15px;
@@ -34,7 +26,6 @@ body {
   height: 70px;
   position: relative;
 }
-
 
 .calendar--nav a {
   position: absolute;
@@ -59,7 +50,6 @@ body {
   right: 10px;
 }
 
-
 .calendar--nav h1 {
   margin: 0;
   position: absolute;
@@ -73,20 +63,17 @@ body {
   user-select: none;
 }
 
-
 .calendar--nav small {
   font-weight: 300;
   font-size: 60%;
 }
 
-
 .calendar--days {
   font-size: 0;
 }
 
-
 .calendar--days span {
-  width: 14.28571%;
+  width: calc(100% / 7);
   display: inline-block;
   text-align: center;
   user-select: none;
@@ -96,7 +83,6 @@ body {
   position: relative;
   font-size: 16px;
 }
-
 
 .calendar--days span.label {
   text-transform: uppercase;
@@ -112,11 +98,9 @@ body {
   border-radius: var(--radius);
 }
 
-
 .calendar--days span.muted {
   color: rgba(0, 0, 0, 0.3);
 }
-
 
 .calendar--days span.start,
 .calendar--days span.between,
@@ -125,21 +109,17 @@ body {
   color: #fff;
 }
 
-
 .calendar--days span.start {
   border-radius: var(--radius) 0 0 var(--radius);
 }
-
 
 .calendar--days span.end {
   border-radius: 0 var(--radius) var(--radius) 0;
 }
 
-
 .calendar--days span.start.end {
   border-radius: var(--radius);
 }
-
 
 .calendar--days span.between:nth-child(7n)::after,
 .calendar--days span.start:nth-child(7n)::after {
@@ -162,7 +142,6 @@ body {
   background-color: var(--primary);
   width: 20px;
 }
-
 
 .calendar--days span.start.end::after {
   display: none;

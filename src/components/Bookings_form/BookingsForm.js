@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import moment from 'moment';
 import './BookingsForm.css';
 
 class BookingForm extends Component {
@@ -22,7 +21,7 @@ class BookingForm extends Component {
   handleDateChange = (date) => {
     const { bookings } = this.props;
     const isDateAvailable = !bookings.some((booking) =>
-      moment(booking.date).isSame(date, 'day')
+      new Date(booking.date).toDateString() === new Date(date).toDateString()
     );
 
     this.setState({
@@ -46,7 +45,6 @@ class BookingForm extends Component {
 
       this.props.onBookingSubmit(newBooking);
 
-    
       this.setState({
         name: '',
         phone: '',
