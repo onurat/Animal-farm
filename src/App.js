@@ -2,8 +2,8 @@ import React from 'react';
 import './App.css';
 import Navbar from './components/navbar/Navbar';
 import Footer from './components/footer/Footer';
-
-
+import Calendar from './components/calender_components/Calendar';
+import BookingForm from './components/Bookings_form/BookingsForm';
 
 function App() {
   return (
@@ -11,7 +11,10 @@ function App() {
       <div className="background-image"></div>
       <div className="content-wrapper">
         <Navbar />
-        <BookingPage /> 
+        <div className="calendar-and-form">
+          <Calendar />
+          <BookingForm />
+        </div>
         <Footer />
       </div>
     </div>
