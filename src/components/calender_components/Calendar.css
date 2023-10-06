@@ -1,3 +1,4 @@
+/* Add this CSS to your Calendar.css file */
 :root {
   --primary: #b670f4;
   --radius: 12px;
@@ -10,7 +11,7 @@ body {
 }
 
 .calendar {
-  width: 45%; /* Adjust the width as needed */
+  width: 45%;
   padding: 15px;
   box-shadow: 1px 1px 20px 0 rgba(0, 0, 0, 0.4);
   border-radius: var(--radius);
@@ -145,4 +146,11 @@ body {
 
 .calendar--days span.start.end::after {
   display: none;
+}
+
+/* Add this CSS to highlight the selected date */
+.calendar--days span.selected {
+  background-color: var(--primary);
+  color: #fff;
+  border-radius: var(--radius);
 }

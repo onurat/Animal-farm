@@ -4,6 +4,7 @@ import Navbar from './components/navbar/Navbar';
 import Footer from './components/footer/Footer';
 import Calendar from './components/calender_components/Calendar';
 import BookingForm from './components/Bookings_form/BookingsForm';
+import BookingManager from './components/Booking_Manager.js/BookingManager';
 
 function App() {
   return (
@@ -11,10 +12,10 @@ function App() {
       <div className="background-image"></div>
       <div className="content-wrapper">
         <Navbar />
-        <div className="calendar-and-form">
+        <BookingManager>
           <Calendar />
           <BookingForm />
-        </div>
+        </BookingManager>
         <Footer />
       </div>
     </div>

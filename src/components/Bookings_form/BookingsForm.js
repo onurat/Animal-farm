@@ -33,9 +33,15 @@ class BookingForm extends Component {
   handleSubmit = (e) => {
     e.preventDefault();
 
-    const { name, phone, email, selectedDate, isDateAvailable } = this.state;
+    const { selectedDate, name, phone, email } = this.state;
+    const { bookings } = this.props;
+    const bookingsForSelectedDate = bookings.filter((booking) =>
+      new Date(booking.date).toDateString() === new Date(selectedDate).toDateString()
+    );
 
-    if (isDateAvailable && selectedDate) {
+    if (bookingsForSelectedDate.length >= 2) {
+      alert("Sorry, this date is fully booked.");
+    } else {
       const newBooking = {
         date: selectedDate,
         name,

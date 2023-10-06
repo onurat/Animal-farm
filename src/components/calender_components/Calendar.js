@@ -22,7 +22,7 @@ class Heading extends Component {
 
 class Day extends Component {
   render() {
-    const { currentDate, date, startDate, endDate, onClick } = this.props;
+    const { currentDate, date, startDate, endDate, onClick, isBooked, selectedDate } = this.props;
     let className = [];
 
     const isSameDay = date.toDateString() === currentDate.toDateString();
@@ -51,6 +51,12 @@ class Day extends Component {
       className.push('muted');
     }
 
+    if (isBooked) {
+      className.push('booked');
+    }
+
+    const isSelected = selectedDate && date.toDateString() === selectedDate.toDateString();
+
     return (
       <span
         onClick={() => onClick(date)}
@@ -58,7 +64,7 @@ class Day extends Component {
         role="button"
         tabIndex="0"
         currentDate={date}
-        className={className.join(' ')}
+        className={className.join(' ') + (isSelected ? ' selected' : '')}
       >
         {date.getDate()}
       </span>
@@ -68,7 +74,7 @@ class Day extends Component {
 
 class Days extends Component {
   render() {
-    const { date, startDate, endDate, onClick } = this.props;
+    const { date, startDate, endDate, onClick, bookedDates, selectedDate } = this.props;
     const thisDate = new Date(date);
     const daysInMonth = new Date(date.getFullYear(), date.getMonth() + 1, 0).getDate();
     const firstDayDate = new Date(date.getFullYear(), date.getMonth(), 1);
@@ -100,6 +106,8 @@ class Days extends Component {
           date={new Date(previousMonth)}
           startDate={startDate}
           endDate={endDate}
+          isBooked={bookedDates.includes(previousMonth.toDateString())}
+          selectedDate={selectedDate}
         />
       );
     }
@@ -118,6 +126,8 @@ class Days extends Component {
           date={new Date(thisDate)}
           startDate={startDate}
           endDate={endDate}
+          isBooked={bookedDates.includes(thisDate.toDateString())}
+          selectedDate={selectedDate}
         />
       );
     }
@@ -136,6 +146,8 @@ class Days extends Component {
           date={new Date(nextMonth)}
           startDate={startDate}
           endDate={endDate}
+          isBooked={bookedDates.includes(nextMonth.toDateString())}
+          selectedDate={selectedDate}
         />
       );
     }
@@ -169,48 +181,27 @@ class Calendar extends Component {
   changeMonth(month) {
     const { date } = this.state;
     date.setMonth(month);
-    this.setState({ date });
-  }
-
-  changeDate(date) {
-    let { startDate, endDate } = this.state;
-
-    if (
-      startDate === null ||
-      date.toDateString() !== startDate.toDateString() ||
-      !startDate.toDateString() === endDate.toDateString()
-    ) {
-      startDate = new Date(date);
-      endDate = new Date(date);
-    } else if (date.toDateString() === startDate.toDateString() && date.toDateString() === endDate.toDateString()) {
-      startDate = null;
-      endDate = null;
-    } else if (date.toDateString() > startDate.toDateString()) {
-      endDate = new Date(date);
-    }
 
     this.setState({
-      startDate,
-      endDate,
+      date,
     });
   }
 
   render() {
-    const { date, startDate, endDate } = this.state;
-
     return (
-      <div className="calendar">
+      <div className="calendar--container">
         <Heading
-          date={date}
+          date={this.state.date}
           changeMonth={(month) => this.changeMonth(month)}
           resetDate={() => this.resetDate()}
         />
-
         <Days
-          onClick={(date) => this.changeDate(date)}
-          date={date}
-          startDate={startDate}
-          endDate={endDate}
+          date={this.state.date}
+          startDate={this.state.startDate}
+          endDate={this.state.endDate}
+          onClick={(date) => console.log('Clicked on date:', date)}
+          bookedDates={this.props.bookedDates}
+          selectedDate={this.props.selectedDate}
         />
       </div>
     );
