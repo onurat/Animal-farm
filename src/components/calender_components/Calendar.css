@@ -1,157 +1,81 @@
-:root {
-  --primary: #b670f4;
-  --radius: 12px;
-}
-
-body {
-  font-family: 'Roboto', sans-serif;
-  background-color: #f8f7fa;
-  color: #333;
-  margin: 0;
-  padding: 0;
-  overflow: hidden;
-}
-
+/* Calendar Container */
 .calendar {
-  width: 45%;
-  padding: 15px;
-  box-shadow: 1px 1px 20px 0 rgba(0, 0, 0, 0.4);
-  border-radius: var(--radius);
-  overflow: hidden;
-  background-color: rgba(255, 255, 255, 0.95);
+  margin: 2rem 15rem 2.5rem 12.5rem;
+  background-color: #fff;
+  border-radius: 0.5rem;
+  box-shadow: 0px 0.25rem 0rem rgba(0, 0, 0, 0.1);
+  font-family: 'Arial', sans-serif;
+  width: 35rem;
+  margin-top: 0rem;
 }
 
-.calendar--nav {
-  margin: -15px -15px 15px;
-  padding: 0 15px;
-  background-color: var(--primary);
+/* Calendar Header */
+.calendar-header {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.625rem 1.25rem;
+  background-color: #6B8BFE;
+  border-radius: 0.5rem 0.5rem 0 0;
   color: #fff;
-  height: 70px;
-  position: relative;
 }
 
-.calendar--nav a {
-  position: absolute;
+.calendar-header span {
+  font-size: 1.125rem;
+  font-weight: bold;
+}
+
+.calendar-header button {
+  background: none;
+  border: none;
+  color: #fff;
+  font-size: 1.125rem;
   cursor: pointer;
-  left: 10px;
-  font-size: 32px;
-  line-height: 1;
-  top: 16px;
-  width: 30px;
-  text-align: center;
-  display: inline-block;
-  color: rgba(255, 255, 255, 0.6);
-  user-select: none;
+  outline: none;
 }
 
-.calendar--nav a:hover {
-  color: #fff;
+/* Day Labels and Days */
+.calendar-days-header,
+.calendar-row {
+  display: flex;
 }
 
-.calendar--nav a:last-child {
-  left: auto;
-  right: 10px;
+.calendar-day-header,
+.calendar-day {
+  width: 80px;
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #F0F0F0;
 }
 
-.calendar--nav h1 {
-  margin: 0;
-  position: absolute;
-  left: 40px;
-  right: 40px;
-  text-align: center;
+.calendar-day-header {
+  background-color: #F8F8F8;
+  font-weight: bold;
+}
+
+.calendar-day:hover {
+  background-color: rgba(0, 0, 0, 0.05);
   cursor: pointer;
-  font-weight: 400;
-  font-size: 30px;
-  line-height: 66px;
-  user-select: none;
 }
 
-.calendar--nav small {
-  font-weight: 300;
-  font-size: 60%;
+.calendar-day.empty {
+  background-color: #F8F8F8;
+  border: none;
 }
 
-.calendar--days {
-  font-size: 0;
-}
-
-.calendar--days span {
-  width: calc(100% / 7);
-  display: inline-block;
-  text-align: center;
-  user-select: none;
-  cursor: pointer;
-  margin: 8px 0;
-  line-height: 34px;
-  position: relative;
-  font-size: 16px;
-}
-
-.calendar--days span.label {
-  text-transform: uppercase;
-  font-weight: 700;
-  color: rgba(0, 0, 0, 0.3);
-  font-size: 14px;
-  cursor: initial;
-}
-
-.calendar--days span.active {
-  font-weight: 700;
-  background-color: rgba(var(--primary), 0.95);
-  border-radius: var(--radius);
-}
-
-.calendar--days span.muted {
-  color: rgba(0, 0, 0, 0.3);
-}
-
-.calendar--days span.start,
-.calendar--days span.between,
-.calendar--days span.end {
-  background-color: var(--primary);
+/* Highlighted Dates */
+.calendar-day.green {
+  background-color: #4CAF50;
   color: #fff;
 }
 
-.calendar--days span.start {
-  border-radius: var(--radius) 0 0 var(--radius);
-}
-
-.calendar--days span.end {
-  border-radius: 0 var(--radius) var(--radius) 0;
-}
-
-.calendar--days span.start.end {
-  border-radius: var(--radius);
-}
-
-.calendar--days span.between:nth-child(7n)::after,
-.calendar--days span.start:nth-child(7n)::after {
-  content: "";
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 100%;
-  background-color: var(--primary);
-  width: 20px;
-}
-
-.calendar--days span.between:nth-child(7n + 1)::after,
-.calendar--days span.end:nth-child(7n + 1)::after {
-  content: "";
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  right: 100%;
-  background-color: var(--primary);
-  width: 20px;
-}
-
-.calendar--days span.start.end::after {
-  display: none;
-}
-
-.calendar--days span.selected {
-  background-color: var(--primary);
+.calendar-day.red {
+  background-color: rgb(202, 123, 123);
   color: #fff;
-  border-radius: var(--radius);
+}
+
+.calendar-day.orange {
+  background-color: #FFC107;
+  color: #fff;
 }

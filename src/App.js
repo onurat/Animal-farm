@@ -4,20 +4,16 @@ import Navbar from './components/navbar/Navbar';
 import Footer from './components/footer/Footer';
 import Calendar from './components/calender_components/Calendar';
 import BookingForm from './components/Bookings_form/BookingsForm';
-import BookingManager from './components/Booking_Manager.js/BookingManager';
 
 function App() {
   return (
     <div className="App">
-      <div className="background-image"></div>
-      <div className="content-wrapper">
-        <Navbar />
-        <BookingManager>
-          <Calendar />
-          <BookingForm />
-        </BookingManager>
-        <Footer />
+      <Navbar />
+      <div className="calendar-and-form">
+        <Calendar />
+        <BookingForm />
       </div>
+      <Footer />
     </div>
   );
 }

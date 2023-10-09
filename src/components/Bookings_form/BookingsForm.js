@@ -1,113 +1,85 @@
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 import './BookingsForm.css';
 
-class BookingForm extends Component {
-  constructor(props) {
-    super(props);
+function BookingForm() {
+  const [name, setName] = useState('');
+  const [phone, setPhone] = useState('');
+  const [email, setEmail] = useState('');
+  const [selectedDate, setSelectedDate] = useState('');
+  const [isDateAvailable, setIsDateAvailable] = useState(true);
 
-    this.state = {
-      name: '',
-      phone: '',
-      email: '',
-      selectedDate: null,
-      isDateAvailable: true,
-    };
-  }
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    if (name === 'name') {
+      setName(value);
+    } else if (name === 'phone') {
+      setPhone(value);
+    } else if (name === 'email') {
+      setEmail(value);
+    }
+  };
 
-  handleInputChange = (e) => {
-    this.setState({ [e.target.name]: e.target.value });
-  }
+  const handleDateChange = (date) => {
+    // You can implement date availability checks here if needed
+    setSelectedDate(date);
+    setIsDateAvailable(true); // Update with your date availability logic
+  };
 
-  handleDateChange = (date) => {
-    const { bookings } = this.props;
-    const isDateAvailable = !bookings.some((booking) =>
-      new Date(booking.date).toDateString() === new Date(date).toDateString()
-    );
-
-    this.setState({
-      selectedDate: date,
-      isDateAvailable,
-    });
-  }
-
-  handleSubmit = (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
 
-    const { selectedDate, name, phone, email } = this.state;
-    const { bookings } = this.props;
-    const bookingsForSelectedDate = bookings.filter((booking) =>
-      new Date(booking.date).toDateString() === new Date(selectedDate).toDateString()
-    );
+    // Your form submission logic can be implemented here
 
-    if (bookingsForSelectedDate.length >= 2) {
-      alert("Sorry, this date is fully booked.");
-    } else {
-      const newBooking = {
-        date: selectedDate,
-        name,
-        phone,
-        email,
-      };
+    setName('');
+    setPhone('');
+    setEmail('');
+    setSelectedDate('');
+    setIsDateAvailable(true);
+  };
 
-      this.props.onBookingSubmit(newBooking);
-
-      this.setState({
-        name: '',
-        phone: '',
-        email: '',
-        selectedDate: null,
-        isDateAvailable: true,
-      });
-    }
-  }
-
-  render() {
-    const { name, phone, email, selectedDate, isDateAvailable } = this.state;
-
-    return (
-      <div className="booking-form">
-        <h2>Book a Slot</h2>
-        <form onSubmit={this.handleSubmit}>
+  return (
+    <div className="booking-form">
+      <h2>Book a Slot</h2>
+      <form onSubmit={handleSubmit}>
+        <input
+          type="text"
+          name="name"
+          placeholder="Name"
+          value={name}
+          onChange={handleInputChange}
+        />
+        <input
+          type="text"
+          name="phone"
+          placeholder="Phone"
+          value={phone}
+          onChange={handleInputChange}
+        />
+        <input
+          type="email"
+          name="email"
+          placeholder="Email"
+          value={email}
+          onChange={handleInputChange}
+        />
+        <div className="date-picker">
+          <label>Select a Date:</label>
           <input
-            type="text"
-            name="name"
-            placeholder="Name"
-            value={name}
-            onChange={this.handleInputChange}
+            type="date"
+            name="selectedDate"
+            value={selectedDate}
+            onChange={(e) => handleDateChange(e.target.value)}
           />
-          <input
-            type="text"
-            name="phone"
-            placeholder="Phone"
-            value={phone}
-            onChange={this.handleInputChange}
-          />
-          <input
-            type="email"
-            name="email"
-            placeholder="Email"
-            value={email}
-            onChange={this.handleInputChange}
-          />
-          <div className="date-picker">
-            <label>Select a Date:</label>
-            <input
-              type="date"
-              name="selectedDate"
-              value={selectedDate}
-              onChange={(e) => this.handleDateChange(e.target.value)}
-            />
-          </div>
-          {!isDateAvailable && (
-            <p className="error">This date is already booked. Please choose another date.</p>
-          )}
-          <button type="submit" disabled={!selectedDate || !isDateAvailable}>
-            Book
-          </button>
-        </form>
-      </div>
-    );
-  }
+        </div>
+        {!isDateAvailable && (
+          <p className="error">This date is already booked. Please choose another date.</p>
+        )}
+        <button type="submit" disabled={!selectedDate || !isDateAvailable}>
+          Book
+        </button>
+      </form>
+    </div>
+  );
 }
 
 export default BookingForm;
