@@ -20,21 +20,42 @@ function BookingForm() {
   };
 
   const handleDateChange = (date) => {
-    // You can implement date availability checks here if needed
     setSelectedDate(date);
-    setIsDateAvailable(true); // Update with your date availability logic
+    setIsDateAvailable(true);
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // Your form submission logic can be implemented here
+    const bookingData = {
+      name,
+      phone,
+      email,
+      selectedDate,
+    };
 
-    setName('');
-    setPhone('');
-    setEmail('');
-    setSelectedDate('');
-    setIsDateAvailable(true);
+    try {
+      const response = await fetch('/api/bookings', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(bookingData),
+      });
+
+      if (response.ok) {
+        console.log('Booking successfully submitted.');
+        setName('');
+        setPhone('');
+        setEmail('');
+        setSelectedDate('');
+        setIsDateAvailable(true);
+      } else {
+        console.error('Error submitting booking.');
+      }
+    } catch (error) {
+      console.error('Network error:', error);
+    }
   };
 
   return (
