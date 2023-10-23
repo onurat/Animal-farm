@@ -6,7 +6,7 @@ function Calendar() {
   const [highlightedDates, setHighlightedDates] = useState({});
 
   useEffect(() => {
-    // You can fetch the data here if needed
+   
   }, []);
 
   const daysInMonth = new Date(date.getFullYear(), date.getMonth() + 1, 0).getDate();
