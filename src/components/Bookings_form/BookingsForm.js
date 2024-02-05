@@ -35,7 +35,7 @@ function BookingForm() {
     };
 
     try {
-      const response = await fetch('/api/bookings', {
+      const response = await fetch('https://animal-farm.onrender.com/api/bookings', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

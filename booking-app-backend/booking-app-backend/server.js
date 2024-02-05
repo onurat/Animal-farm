@@ -17,6 +17,7 @@ app.listen(port, () => {
 
 app.post('/api/bookings', async (req, res) => {
   const { name, phone, email, selectedDate } = req.body;
+  console.log('Received booking data:', { name, phone, email, selectedDate });
 
   try {
     const client = await pool.connect();
