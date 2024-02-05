@@ -1,0 +1,9 @@
+- name: booking-app-backend
+  type: web
+  buildCommand: npm install
+  startCommand: npm start
+
+- name: booking-app-frontend
+  type: web
+  buildCommand: npm install --prefix client
+  startCommand: npm start --prefix client
